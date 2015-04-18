@@ -1,0 +1,8 @@
+/*Basic Implementation of CSS flowsheets in profile.html*/
+p {
+	font-size: 4em;
+	color: #d1e8d2;
+	background-color: #098612;
+	font-family: verdana, impact;
+	text-align: center;
+}
