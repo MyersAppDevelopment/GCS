@@ -1,0 +1,53 @@
+use golfclubsharingtestdb;
+
+CREATE TABLE usermodel (
+id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+fname VARCHAR(64),
+lname VARCHAR(64),
+email VARCHAR(128),
+password VARCHAR(64),
+address1_id INT UNSIGNED,
+receivePay_id INT UNSIGNED,
+supplierReceivePay_id INT UNSIGNED,
+golfItems_id INT UNSIGNED,
+primary key(id),
+unique (email));
+
+CREATE TABLE addressmodel (
+address_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+streetAddress1 VARCHAR(64),
+streetAddress2 VARCHAR(64),
+city VARCHAR(64),
+state VARCHAR(64),
+zipcode CHAR(5),
+primary key (address_id));
+
+CREATE TABLE receivepaymodel (
+receivePay_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+id INT UNSIGNED,
+paymentMethodNonce VARCHAR(64),
+fname VARCHAR(64),
+lname VARCHAR(64),
+billingAddress VARCHAR(256),
+primary key (receivePay_id));
+
+CREATE TABLE paysuppliermodel (
+supplierReceivePay_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+id INT UNSIGNED,
+paymentMethodNonce VARCHAR(64),
+fname VARCHAR(64),
+lname VARCHAR(64),
+billingAddress VARCHAR(256),
+primary key (supplierReceivePay_id));
+
+CREATE TABLE golfbagmodel (
+golfItems_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+pictureReference VARCHAR(256),
+description VARCHAR(1024),
+dailyRate DECIMAL(5,2),
+availability BOOLEAN,
+primary key (golfItems_id));
+
+CREATE TABLE reservedclubsmodel (
+golfItems_id INT UNSIGNED NOT NULL,
+dateReserved DATE);
