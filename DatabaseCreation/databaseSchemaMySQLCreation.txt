@@ -15,8 +15,8 @@ unique (email));
 
 CREATE TABLE addressmodel (
 address_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-streetAddress1 VARCHAR(64),
-streetAddress2 VARCHAR(64),
+streetAddressOne VARCHAR(64),
+streetAddressTwo VARCHAR(64),
 city VARCHAR(64),
 state VARCHAR(64),
 zipcode CHAR(5),
