@@ -29,8 +29,8 @@ function test_input($data) {
 }
 
 $servername = "localhost";
-$username = "admin";
-$password = "Smiggy77";
+$username = "rmyers7";
+$password = "testpw";
 $dbname = "golfclubsharingtestdb";
 
 // Create connection
