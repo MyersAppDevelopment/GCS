@@ -22,23 +22,23 @@ state VARCHAR(64),
 zipcode CHAR(5),
 primary key (address_id));
 
-CREATE TABLE receivepaymodel (
-receivePay_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE consumerpaymodel (
+consumerPay_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 id INT UNSIGNED,
 paymentMethodNonce VARCHAR(64),
 fname VARCHAR(64),
 lname VARCHAR(64),
 billingAddress VARCHAR(256),
-primary key (receivePay_id));
+primary key (consumerPay_id));
 
 CREATE TABLE paysuppliermodel (
-supplierReceivePay_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+paySupplier_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 id INT UNSIGNED,
 paymentMethodNonce VARCHAR(64),
 fname VARCHAR(64),
 lname VARCHAR(64),
 billingAddress VARCHAR(256),
-primary key (supplierReceivePay_id));
+primary key (paySupplier_id));
 
 CREATE TABLE golfbagmodel (
 golfItems_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -51,3 +51,14 @@ primary key (golfItems_id));
 CREATE TABLE reservedclubsmodel (
 golfItems_id INT UNSIGNED NOT NULL,
 dateReserved DATE);
+
+CREATE TABLE transactionmodel (
+transaction_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+supplier_id INT UNSIGNED,
+consumer_id INT UNSIGNED,
+golfItems_id INT UNSIGNED,
+consumerAddress_id INT UNSIGNED,
+consumerPay_id INT UNSIGNED,
+paySupplier_id INT UNSIGNED,
+transactionDate DATE,
+primary key (transaction_id));
