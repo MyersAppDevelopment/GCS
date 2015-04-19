@@ -1,4 +1,5 @@
 <?php
+
 if (empty($_POST["address"])) {
 		$addressERR = "Street Address is required.";
     echo $addressERR;
@@ -70,6 +71,17 @@ $insertAddressIntoAddressModel = "INSERT INTO addressmodel (streetAddressOne, st
 
 if ($conn->query($insertAddressIntoAddressModel) === TRUE) {
     echo "New address record created successfuly";
+    	$lastAddressId =  $conn->insert_id;
+    	echo $lastAddressId;
+    	session_start();
+    	$customerId = $_SESSION['customerId'];
+    	$updateUserModelForAddress = "UPDATE usermodel SET address1_id='$conn->insert_id' WHERE id='$customerId'";
+    	if ($conn->query($updateUserModelForAddress) === TRUE) {
+    		echo "Address_id added into user model";
+    	}
+    	else {
+    		echo "Error: " . $sql . "<br>" . $conn->error;
+    	}
 
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
