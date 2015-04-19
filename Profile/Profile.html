@@ -58,7 +58,7 @@ Profile
 
 		<div class="form-group">
 			<label for="state">State:</label>
-			<select class="form-control" id="state">
+			<select class="form-control" id="state" name="state">
 				<option>AK</option>
 				<option>AL</option>
 				<option>AZ</option>
@@ -112,7 +112,12 @@ Profile
 			</select>
 		</div>
 
-		<button type="submit" class="btn btn-default">Update Address</button>
+		<div class="form-group">
+			<label for="zipcode">Zipcode:</label>
+			<input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Enter Zipcode">
+		</div>
+
+		<button type="submit" class="btn btn-default">Add Address</button>
 
 	</form>
 </div>
