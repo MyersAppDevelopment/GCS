@@ -43,10 +43,21 @@ if ($conn->connect_error) {
 
 $passwordVerificationResult = mysqli_query($conn, "SELECT * FROM usermodel WHERE email='$emailAdd' AND password='$pw'");
 while($row = mysqli_fetch_array($passwordVerificationResult)) {
-        $success = true;
+      $customerId = $row[0];
+      $firstName = $row[1];
+      $lastName = $row[2];
+      $emailAddress = $row[3];
+      $success = true;
     }
     if($success == true) {
-        echo 'Success!';
-    } else {
-        echo '<div class="alert alert-danger">Oops! It looks like your username and/or password are incorrect. Please try again.</div>';
+      session_start();
+      $_SESSION['customerId'] = $customerId;
+      $_SESSION['firstName'] = $firstName;
+      $_SESSION['lastName'] = $lastName;
+      $_SESSION['emailAddress'] = $emailAddress;
+
+     header('Location: http://localhost/GCS/Profile/Profile.html');
+    }
+    else {
+      echo '<div class="alert alert-danger">Oops! It looks like your username and/or password are incorrect. Please try again.</div>';
     }
