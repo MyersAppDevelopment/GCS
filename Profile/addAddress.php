@@ -1,4 +1,6 @@
 <?php
+session_start();
+$customerId = $_SESSION['customerId'];
 
 if (empty($_POST["address"])) {
 		$addressERR = "Street Address is required.";
@@ -73,8 +75,7 @@ if ($conn->query($insertAddressIntoAddressModel) === TRUE) {
     echo "New address record created successfuly";
     	$lastAddressId =  $conn->insert_id;
     	echo $lastAddressId;
-    	session_start();
-    	$customerId = $_SESSION['customerId'];
+
     	$updateUserModelForAddress = "UPDATE usermodel SET address1_id='$conn->insert_id' WHERE id='$customerId'";
     	if ($conn->query($updateUserModelForAddress) === TRUE) {
     		echo "Address_id added into user model";
