@@ -78,6 +78,7 @@ if ($conn->query($insertAddressIntoAddressModel) === TRUE) {
 
     	$updateUserModelForAddress = "UPDATE usermodel SET address1_id='$conn->insert_id' WHERE id='$customerId'";
     	if ($conn->query($updateUserModelForAddress) === TRUE) {
+         $_SESSION['customerId'] = $customerId;
     		echo "Address_id added into user model";
     	}
     	else {
