@@ -121,5 +121,40 @@ Profile
 
 	</form>
 </div>
+<br>
 
+<div class="container">
+	<form role="form" id="imageUpload" action="uploadImage.php" method="POST" enctype='multipart/form-data'>
+			<div class="form-inline">
+				<label for="pictureReference">Upload Picture:</label>
+				<input type="file" class="form-control" id="pictureReference" name="pictureReference" placeholder="Upload Picture">
+				<button type="submit" class="btn btn-default" value="Upload">Upload</button>
+			</div>
+		</form>
+	</div>
+
+<div class="container">
+	<form role="form" id="addBagForm" action="addBag.php" method="POST">
+
+
+
+		<div class="form-group">
+			<label for="description">Description:</label>
+			<input type="text" class="form-control" id="description" name="description" placeholder="Enter a descpription of your clubs here">
+		</div>
+
+		<form class="form-inline">
+		  <div class="form-group">
+		    <label class="sr-only" for="dailyRate">Daily Rate (in dollars)</label>
+		    <div class="input-group">
+		      <div class="input-group-addon">$</div>
+		      <input type="number" class="form-control" id="dailyRate" name="dailyRate" placeholder="Amount">
+		      <div class="input-group-addon">.00</div>
+		    </div>
+		    <button type="submit" class="btn btn-primary">Set Daily Rate</button>
+		  </div>
+		</form>
+		<button type="submit" class="btn btn-default">Add Bag</button>
+	</form>
+</div>
 </html>
