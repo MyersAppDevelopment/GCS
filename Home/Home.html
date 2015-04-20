@@ -21,10 +21,21 @@
 
 
 <form>
-<div class="btn-group">
-<button type="submit" class="btn btn-default" formaction="http://localhost/GCS/Home/UserRegistrationForm.html">Sign Up</button>
-<button type="submit" class="btn btn-default" formaction="http://localhost/GCS/Home/UserSignInForm.html">Sign In</button>
-</div>
+	<div class="btn-group">
+		<button type="submit" class="btn btn-default" formaction="http://localhost/GCS/Home/UserRegistrationForm.html">Sign Up
+		</button>
+		<button type="submit" class="btn btn-default" formaction="http://localhost/GCS/Home/UserSignInForm.html">
+		Sign In
+		</button>
+	</div>
 </form>
+
+<div class="container">
+	<form role="form" id="searchForm" action="search.php" method="POST">
+		<div class="form-inline">
+			<label for="zipcode">Zipcode:</label>
+			<input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Enter Zipcode">
+			<button type="submit" class="btn btn-default">Search</button>
+		</div>
 
 </html>
