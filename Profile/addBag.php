@@ -1,9 +1,11 @@
 <?php
 session_start();
 $customerId = $_SESSION['customerId'];
-$addressId = $_SESSION['addressId'];
+$addressOfClubs = intval($_POST['addressOfClubs']);
+$availability = true;
 echo $customerId;
-echo $addressId;
+echo $addressOfClubs;
+echo gettype($addressOfClubs);
 
 $target_dir = "bagPics/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -84,21 +86,11 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$insertGolfBagIntoGolfBagModel = "INSERT INTO golfbagmodel (address_id, pictureReference, description, dailyRate, availability) VALUES ('$addressId','$target_file','$description','$dailyRate','TRUE')";
+$insertGolfBagIntoGolfBagModel = "INSERT INTO golfbagmodel (id, address_id, pictureReference, description, dailyRate, availability) VALUES ('$customerId','$addressOfClubs','$target_file','$description','$dailyRate','$availability')";
 
 if ($conn->query($insertGolfBagIntoGolfBagModel) === TRUE) {
     echo "New bag record created.";
-    	$lastBagId =  $conn->insert_id;
-    	echo $lastBagId;
-
-    	$updateUserModelForBag = "UPDATE usermodel SET golfItems_id='$conn->insert_id' WHERE id='$customerId'";
-    	if ($conn->query($updateUserModelForBag) === TRUE) {
-    		echo "golfItems_id added into user model";
-    	}
-    	else {
-    		echo "Error: " . $sql . "<br>" . $conn->error;
-    	}
-
-} else {
+}
+else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
