@@ -30,7 +30,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$zipcodeSearchQuery = "SELECT id,fname,lname,email FROM usermodel WHERE address1_id IN (SELECT address_id FROM addressmodel WHERE zipcode='$zipcode')";
+$zipcodeSearchQuery = "SELECT id,fname,lname,email FROM usermodel WHERE id IN (SELECT id FROM addressmodel WHERE zipcode='$zipcode')";
 $zipcodeSearchResult = $conn->query($zipcodeSearchQuery);
 if (!$zipcodeSearchResult) die ("Database access failed: " . $conn->error);
 
