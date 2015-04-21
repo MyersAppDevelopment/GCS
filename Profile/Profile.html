@@ -7,8 +7,7 @@
 <head>
 	<!-- Below imports CSS flowsheet -->
 	<!-- <link type="text/css" rel="stylesheet" href="style.css"/> -->
-	<!-- User input validation script-->
-	<script src="uploadImage.js"></script>
+	<!--<script src="uploadImage.js"></script>-->
 
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -122,7 +121,33 @@ Profile
 	</form>
 </div>
 <br>
+<!--
+<div class="container">
+<input type="file" class="form-control" onchange="previewFile()"><br>
+<img src="" height="200" alt="Image preview...">
+</div>
+-->
+<script>
+   function previewFile(){
+       var preview = document.querySelector('img'); //selects the query named img
+       var file    = document.querySelector('input[type=file]').files[0]; //sames as here
+       var reader  = new FileReader();
 
+       reader.onloadend = function () {
+           preview.src = reader.result;
+       }
+
+       if (file) {
+           reader.readAsDataURL(file); //reads the data as a URL
+       } else {
+           preview.src = "";
+       }
+  }
+
+  previewFile();  //calls the function named previewFile()
+  </script>
+
+<!--
 <div class="container">
 	<form role="form" id="imageUpload" action="uploadImage.php" method="POST" enctype='multipart/form-data'>
 			<div class="form-inline">
@@ -132,25 +157,81 @@ Profile
 			</div>
 		</form>
 	</div>
+-->
 
 <div class="container">
-	<form role="form" id="addBagForm" action="addBag.php" method="POST">
+	<form role="form" id="addBagForm" action="addBag.php" method="POST" enctype='multipart/form-data'>
+		<div class="form-inline">
+			<label for="fileToUpload">Upload Picture:</label>
+			<input type="file" class="form-control" id="fileToUpload" name ="fileToUpload" onchange="previewFile()" placeholder="Upload Picture"><br>
+			<img src="" height="200" alt="Image preview...">
+		</div>
+
 		<div class="form-group">
 			<label for="description">Description:</label>
 			<input type="text" class="form-control" id="description" name="description" placeholder="Enter a descpription of your clubs here">
 		</div>
 
-		<form class="form-inline">
-		  <div class="form-group">
-		    <label class="sr-only" for="dailyRate">Daily Rate (in dollars)</label>
-		    <div class="input-group">
-		      <div class="input-group-addon">$</div>
-		      <input type="number" class="form-control" id="dailyRate" name="dailyRate" placeholder="Amount">
-		      <div class="input-group-addon">.00</div>
-		    </div>
-		    <button type="submit" class="btn btn-primary">Set Daily Rate</button>
+		<div class="form-group">
+			<label for="addressOfClubs">Select Address Of Clubs:</label>
+			<select class="form-control" id="addressOfClubs" name="addressOfClubs">
+				<?php
+					$servername = "localhost";
+					$username = "rmyers7";
+					$password = "testpw";
+					$dbname = "golfclubsharingtestdb";
+
+					// Create connection
+					$conn = new mysqli($servername, $username, $password, $dbname);
+					// Check connection
+					if ($conn->connect_error) {
+    			die("Connection failed: " . $conn->connect_error);
+					}
+
+					$populateAddressListQuery = "SELECT * FROM addressmodel WHERE id IN (SELECT id FROM usermodel WHERE id='$customerId')";
+
+					$addressListResult = $conn->query($populateAddressListQuery);
+					if (!$addressListResult) die ("Database access failed: " . $conn->error);
+
+					$rows = $addressListResult->num_rows;
+
+					for ($j = 0 ; $j < $rows ; ++$j)
+					{
+						$addressListResult->data_seek($j);
+						$row = $addressListResult->fetch_array(MYSQLI_NUM);
+						echo "<option value='$row[0]'>$row[2]";
+						if ($row[3] != ""){
+						echo " ";
+						echo "$row[3]";
+						echo ", ";
+						echo "$row[4]";
+						echo ", ";
+						echo "$row[5]";
+						echo " ";
+						echo "$row[6]</option>";
+						}
+						else {
+						echo ", ";
+						echo "$row[4]";
+						echo ", ";
+						echo "$row[5]";
+						echo " ";
+						echo "$row[6]</option>";
+						}
+					}
+				?>
+			</select>
+		</div>
+
+	  <div class="form-inline">
+	    <label for="dailyRate">Daily Rate (in dollars)</label>
+	    <div class="input-group">
+	      <div class="input-group-addon">$</div>
+	      <input type="number" class="form-control" id="dailyRate" name="dailyRate" placeholder="Amount">
+	      <div class="input-group-addon">.00</div>
+	   </div>
+
 		  </div>
-		</form>
 		<button type="submit" class="btn btn-default">Add Bag</button>
 	</form>
 </div>

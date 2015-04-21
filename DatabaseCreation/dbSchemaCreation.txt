@@ -6,15 +6,12 @@ fname VARCHAR(64),
 lname VARCHAR(64),
 email VARCHAR(128),
 password VARCHAR(64),
-address1_id INT UNSIGNED,
-consumerPay_id INT UNSIGNED,
-paySupplier_id INT UNSIGNED,
-golfItems_id INT UNSIGNED,
 primary key(id),
 unique (email));
 
 CREATE TABLE addressmodel (
 address_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+id INT UNSIGNED,
 streetAddressOne VARCHAR(64),
 streetAddressTwo VARCHAR(64),
 city VARCHAR(64),
@@ -42,6 +39,7 @@ primary key (paySupplier_id));
 
 CREATE TABLE golfbagmodel (
 golfItems_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+id INT UNSIGNED,
 address_id INT UNSIGNED,
 pictureReference VARCHAR(256),
 description VARCHAR(1024),
