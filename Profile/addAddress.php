@@ -69,22 +69,10 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$insertAddressIntoAddressModel = "INSERT INTO addressmodel (streetAddressOne, streetAddressTwo, city, state, zipcode) VALUES ('$address','$addressLineTwo','$city','$state','$zipcode')";
+  $insertAddressIntoAddressModel = "INSERT INTO addressmodel (id, streetAddressOne, streetAddressTwo, city, state, zipcode) VALUES ('$customerId', '$address','$addressLineTwo','$city','$state','$zipcode')";
 
 if ($conn->query($insertAddressIntoAddressModel) === TRUE) {
     echo "New address record created successfuly";
-    	$lastAddressId =  $conn->insert_id;
-    	echo $lastAddressId;
-
-    	$updateUserModelForAddress = "UPDATE usermodel SET address1_id='$conn->insert_id' WHERE id='$customerId'";
-    	if ($conn->query($updateUserModelForAddress) === TRUE) {
-         $_SESSION['customerId'] = $customerId;
-    		echo "Address_id added into user model";
-    	}
-    	else {
-    		echo "Error: " . $sql . "<br>" . $conn->error;
-    	}
-
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
 }
+
+
