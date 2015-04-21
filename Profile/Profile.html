@@ -188,7 +188,7 @@ Profile
     			die("Connection failed: " . $conn->connect_error);
 					}
 
-					$populateAddressListQuery = "SELECT * FROM addressmodel WHERE address_id IN (SELECT address1_id FROM usermodel WHERE id='$customerId')";
+					$populateAddressListQuery = "SELECT * FROM addressmodel WHERE id IN (SELECT id FROM usermodel WHERE id='$customerId')";
 
 					$addressListResult = $conn->query($populateAddressListQuery);
 					if (!$addressListResult) die ("Database access failed: " . $conn->error);
@@ -199,24 +199,24 @@ Profile
 					{
 						$addressListResult->data_seek($j);
 						$row = $addressListResult->fetch_array(MYSQLI_NUM);
-						echo "<option>$row[1]";
-						if ($row[2] != ""){
+						echo "<option value='$row[0]'>$row[2]";
+						if ($row[3] != ""){
 						echo " ";
-						echo "$row[2]";
-						echo ", ";
 						echo "$row[3]";
 						echo ", ";
 						echo "$row[4]";
+						echo ", ";
+						echo "$row[5]";
 						echo " ";
-						echo "$row[5]</option>";
+						echo "$row[6]</option>";
 						}
 						else {
 						echo ", ";
-						echo "$row[3]";
-						echo ", ";
 						echo "$row[4]";
+						echo ", ";
+						echo "$row[5]";
 						echo " ";
-						echo "$row[5]</option>";
+						echo "$row[6]</option>";
 						}
 					}
 				?>
