@@ -3,13 +3,17 @@
 <head>
 
 	<!-- Latest compiled and minified CSS -->
+
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 	<!-- jQuery library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 	<!-- Latest compiled JavaScript -->
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> -->
+
+	<!--Link home.css -->
+	<link rel="stylesheet" href="home.css" type="text/css"/>
 
 <meta charset="utf-8">
 
@@ -18,6 +22,24 @@
 </head>
 
 
+
+<body>
+
+<ul>
+  <li><a href="http://localhost/GCS/Home/registration.html">Sign Up </a></li>
+  <li><a href="http://localhost/GCS/Home/login.html">Sign In</a></li>
+  <li><div class="container">
+	<form role="form" id="searchForm" action="search.php" method="POST">
+		
+			<label for="zipcode">Zipcode:</label>
+			<input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Enter Zipcode"> </li>
+</ul>
+
+</body>
+</html>
+
+
+<!-- Millers original 	
 <form>
 	<div class="btn-group">
 		<button type="submit" class="btn btn-default" formaction="http://localhost/GCS/Home/registration.html">Sign Up
@@ -35,5 +57,9 @@
 			<input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Enter Zipcode">
 			<button type="submit" class="btn btn-default">Search</button>
 		</div>
+</div>		
+</body>
 
 </html>
+
+-->
