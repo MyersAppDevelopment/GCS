@@ -36,13 +36,6 @@ if (!$zipcodeSearchResult) die ("Database access failed: " . $conn->error);
 
 $rows = $zipcodeSearchResult->num_rows;
 
-
-$zipcodeSearchQuery = "SELECT * FROM golfbagmodel WHERE address_id IN (SELECT address_id FROM addressmodel WHERE zipcode='$zipcode')";
-$zipcodeSearchResult = $conn->query($zipcodeSearchQuery);
-if (!$zipcodeSearchResult) die ("Database access failed: " . $conn->error);
-
-$rows = $zipcodeSearchResult->num_rows;
-
 echo "<table><tr> <th>Picture</th> <th>Description</th> <th>Daily Rate</th> </tr>";
 
 for ($j = 0 ; $j < $rows ; ++$j)
