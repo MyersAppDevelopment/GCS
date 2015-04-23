@@ -30,23 +30,26 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$zipcodeSearchQuery = "SELECT id,fname,lname,email FROM usermodel WHERE id IN (SELECT id FROM addressmodel WHERE zipcode='$zipcode')";
+
+$zipcodeSearchQuery = "SELECT pictureReference, description, dailyRate FROM golfbagmodel WHERE address_id IN (SELECT address_id FROM addressmodel WHERE zipcode='$zipcode')";
 $zipcodeSearchResult = $conn->query($zipcodeSearchQuery);
 if (!$zipcodeSearchResult) die ("Database access failed: " . $conn->error);
 
 $rows = $zipcodeSearchResult->num_rows;
-echo "<table><tr> <th>Id</th> <th>First Name</th> <th>Last Name</th> <th>Email Address</th> </tr>";
+echo "<table><tr> <th>Picture</th> <th>Description</th> <th>Daily Rate</th> </tr>";
 
 for ($j = 0 ; $j < $rows ; ++$j)
 {
-	$zipcodeSearchResult->data_seek($j);
-	$row = $zipcodeSearchResult->fetch_array(MYSQLI_NUM);
-	echo "<tr>";
-	for ($k = 0 ; $k < 4 ; ++$k)
-	{
-		echo "<td>$row[$k]</td>";
-	}
+  $zipcodeSearchResult->data_seek($j);
+  $row = $zipcodeSearchResult->fetch_array(MYSQLI_NUM);
+  echo "<tr>";
+  echo "<td><image src='http://localhost/GCS/Profile/$row[0]' style='width:128px;height:128px'></td>";
+  for ($k = 1 ; $k < 3 ; ++$k)
+  {
+    echo "<td>$row[$k]</td>";
+  }
   echo "</tr>";
 }
 
 echo "</table>";
+
