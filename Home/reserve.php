@@ -33,6 +33,13 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+$checkForExistingReservationOnDate = "SELECT * FROM reservedClubsModel WHERE golfItems_id='$golfItemId' AND dateReserved='$reserveDate'";
+$existingReservationResult = $conn->query($checkForExistingReservationOnDate);
+if (!$existingReservationResult) die ("Database access failed: " . $conn->error);
+
+$rows = $existingReservationResult->num_rows;
+
+if ($rows == 0){
 $insertGolfBagIntoReserveModel = "INSERT INTO reservedclubsmodel (golfItems_id, dateReserved) VALUES ('$golfItemId','$reserveDate')";
 
 if ($conn->query($insertGolfBagIntoReserveModel) === TRUE) {
@@ -41,4 +48,8 @@ if ($conn->query($insertGolfBagIntoReserveModel) === TRUE) {
 }
 else {
     echo "Error: " . $sql . "<br>" . $conn->error;
+}
+}
+else {
+	echo "The clubs are already reserved for that date";
 }
